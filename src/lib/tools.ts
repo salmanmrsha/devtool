@@ -44,7 +44,7 @@ export const tools: ToolMeta[] = [
     slug: "json-formatter",
     name: "JSON Formatter",
     shortName: "JSON",
-    description: "Beautify, minify, and validate JSON with 2 or 4 spaces.",
+    description: "Beautify and validate JSON with 2 or 4 spaces.",
     accent: "#7c3aed"
   },
   {

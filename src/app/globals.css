@@ -708,32 +708,76 @@ select {
 }
 
 .json-editor {
-  display: grid;
-  grid-template-columns: 52px minmax(0, 1fr);
-  align-items: stretch;
+  height: calc(100vh - 300px);
+  min-height: 340px;
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: #fbfdff;
 }
 
-.json-line-numbers {
-  display: grid;
-  align-content: start;
-  min-height: 420px;
-  padding: 11px 10px;
+.json-editor .cm-editor {
+  height: 100%;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.json-editor .cm-editor.cm-focused {
+  outline: none;
+}
+
+.json-editor .cm-scroller {
+  font-family: var(--font-mono);
+  line-height: 1.5;
+}
+
+.json-editor .cm-content {
+  padding: 11px 0;
+}
+
+.json-editor .cm-gutters {
   border-right: 1px solid var(--border);
   background: #f1f5f9;
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 13px;
   line-height: 1.5;
-  text-align: right;
+}
+
+.json-editor .cm-lineNumbers .cm-gutterElement {
+  padding: 0 10px 0 12px;
+}
+
+.json-editor .cm-foldGutter .cm-gutterElement {
+  padding: 0 4px;
+  cursor: pointer;
+}
+
+.json-editor .cm-foldGutter .cm-gutterElement:hover {
+  color: #0f172a;
+}
+
+.json-editor .cm-foldPlaceholder {
+  display: inline-block;
+  margin: 0 2px;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 12px;
+  cursor: pointer;
   user-select: none;
 }
 
-.json-line-numbers span {
-  display: block;
+.json-editor .cm-foldPlaceholder:hover {
+  background: #cbd5e1;
+  color: #0f172a;
+}
+
+.json-editor .cm-activeLineGutter {
+  background: transparent;
 }
 
 .json-indent-control button {
@@ -744,21 +788,11 @@ select {
   align-items: center;
 }
 
-.json-input-field textarea {
-  height: calc(100vh - 280px);
-  min-height: 320px;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  resize: none;
-}
-
-.json-input-field {
-  min-width: 0;
-}
-
-.json-input-field textarea:focus {
-  box-shadow: none;
+.json-status {
+  margin: 12px 0 0;
+  color: #15803d;
+  font-size: 13px;
+  font-weight: 750;
 }
 
 .one-line-input {
