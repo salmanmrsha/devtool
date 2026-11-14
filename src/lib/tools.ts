@@ -5,6 +5,7 @@ export type ToolSlug =
   | "json-formatter"
   | "jwt-decoder"
   | "lorem-ipsum-generator"
+  | "markdown-preview"
   | "regex-tester"
   | "secret-key-generator"
   | "uuid-generator"
@@ -60,6 +61,13 @@ export const tools: ToolMeta[] = [
     shortName: "Lorem",
     description: "Generate placeholder paragraphs, sentences, or words.",
     accent: "#15803d"
+  },
+  {
+    slug: "markdown-preview",
+    name: "Markdown Preview",
+    shortName: "Markdown",
+    description: "Write Markdown with live preview, code highlighting, and Mermaid diagrams.",
+    accent: "#0369a1"
   },
   {
     slug: "regex-tester",

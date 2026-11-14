@@ -15,12 +15,16 @@
     "@codemirror/state": "latest",
     "@codemirror/view": "latest",
     "@lezer/highlight": "latest",
+    "highlight.js": "latest",
     "lucide-react": "latest",
+    "markdown-it": "latest",
+    "mermaid": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
   },
   "devDependencies": {
+    "@types/markdown-it": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
