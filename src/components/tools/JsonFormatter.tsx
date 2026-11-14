@@ -24,12 +24,12 @@ import { showToast } from "@/lib/toast";
 const sampleJson = `{"name":"DevTool","features":["format","validate","fold"],"settings":{"indent":2,"local":true}}`;
 
 const jsonHighlight = HighlightStyle.define([
-  { tag: tags.propertyName, color: "#0f172a" },
-  { tag: tags.string, color: "#15803d" },
-  { tag: tags.number, color: "#1d4ed8" },
-  { tag: tags.bool, color: "#b45309" },
-  { tag: tags.null, color: "#b45309" },
-  { tag: tags.punctuation, color: "#64748b" },
+  { tag: tags.propertyName, color: "var(--cm-property)" },
+  { tag: tags.string, color: "var(--cm-string)" },
+  { tag: tags.number, color: "var(--cm-number)" },
+  { tag: tags.bool, color: "var(--cm-atom)" },
+  { tag: tags.null, color: "var(--cm-atom)" },
+  { tag: tags.punctuation, color: "var(--cm-punctuation)" },
 ]);
 
 export default function JsonFormatter() {

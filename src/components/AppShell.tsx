@@ -12,11 +12,11 @@ import {
   Fingerprint,
   Hash,
   KeyRound,
-  Menu,
+  Moon,
   Regex,
+  Sun,
   Text,
-  Wrench,
-  X
+  Wrench
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { tools, type ToolSlug } from "@/lib/tools";
@@ -48,11 +48,24 @@ export function ToolIcon({
 
 export default function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
   const [toast, setToast] = useState("");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const toastTimeout = useRef<number | null>(null);
   const currentTool = tools.find((tool) => pathname === `/${tool.slug}`);
   const toastAccent = currentTool?.accent ?? "#0f766e";
+
+  useEffect(() => {
+    setTheme(
+      document.documentElement.dataset.theme === "dark" ? "dark" : "light"
+    );
+  }, []);
+
+  function toggleTheme() {
+    const next = theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem("devtool-theme", next);
+    setTheme(next);
+  }
 
   useEffect(() => {
     function handleToast(event: Event) {
@@ -80,21 +93,11 @@ export default function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="app-frame">
-      <aside className={`sidebar ${open ? "is-open" : ""}`}>
-        <div className="brand">
-          <Link href="/" className="brand-mark" onClick={() => setOpen(false)}>
-            <Wrench size={20} />
-            <span>DevTool</span>
-          </Link>
-          <button
-            className="icon-button mobile-only"
-            type="button"
-            aria-label="Close navigation"
-            onClick={() => setOpen(false)}
-          >
-            <X size={18} />
-          </button>
-        </div>
+      <header className="navbar">
+        <Link href="/" className="brand-mark">
+          <Wrench size={20} />
+          <span>DevTool</span>
+        </Link>
 
         <nav className="tool-nav" aria-label="Developer tools">
           {tools.map((tool) => {
@@ -104,40 +107,25 @@ export default function AppShell({ children }: { children: ReactNode }) {
                 key={tool.slug}
                 href={`/${tool.slug}`}
                 className={`nav-item ${active ? "is-active" : ""}`}
+                aria-current={active ? "page" : undefined}
                 style={{ "--tool-accent": tool.accent } as CSSProperties}
-                onClick={() => setOpen(false)}
               >
-                <ToolIcon slug={tool.slug} size={18} />
+                <ToolIcon slug={tool.slug} size={16} />
                 <span>{tool.shortName}</span>
               </Link>
             );
           })}
         </nav>
-      </aside>
 
-      <div className="mobile-bar">
-        <Link href="/" className="brand-mark">
-          <Wrench size={19} />
-          <span>DevTool</span>
-        </Link>
         <button
-          className="icon-button"
+          className="theme-toggle"
           type="button"
-          aria-label="Open navigation"
-          onClick={() => setOpen(true)}
+          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          onClick={toggleTheme}
         >
-          <Menu size={20} />
+          {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
         </button>
-      </div>
-
-      {open ? (
-        <button
-          className="backdrop"
-          type="button"
-          aria-label="Close navigation"
-          onClick={() => setOpen(false)}
-        />
-      ) : null}
+      </header>
 
       <main className="app-main">{children}</main>
 
