@@ -120,31 +120,43 @@ export default function JsonFormatter() {
     replaceDoc(JSON.stringify(parsed.value, null, indent));
   }
 
+  function minify() {
+    if (!requireValid()) return;
+    replaceDoc(JSON.stringify(parsed.value));
+  }
+
+  function applyIndent(next: 2 | 4) {
+    setIndent(next);
+    if (!requireValid()) return;
+    replaceDoc(JSON.stringify(parsed.value, null, next));
+  }
+
   const error = parsed.error;
 
   return (
     <div className="tool-stack json-stack">
       <div className="toolbar-row json-toolbar json-toolbar-sticky">
         <CopyButton value={source} disabled={Boolean(error)} />
-        <div className="segmented-control json-indent-control" aria-label="Indentation">
+        <div className="button-row json-action-row">
           <button
             type="button"
-            className={indent === 2 ? "is-selected" : ""}
-            onClick={() => setIndent(2)}
+            className={indent === 2 ? "button button-secondary is-selected" : "button button-secondary"}
+            onClick={() => applyIndent(2)}
           >
             2 spaces
           </button>
           <button
             type="button"
-            className={indent === 4 ? "is-selected" : ""}
-            onClick={() => setIndent(4)}
+            className={indent === 4 ? "button button-secondary is-selected" : "button button-secondary"}
+            onClick={() => applyIndent(4)}
           >
             4 spaces
           </button>
-        </div>
-        <div className="button-row json-action-row">
-          <button className="button button-primary" type="button" onClick={beautify}>
+          <button className="button button-secondary" type="button" onClick={beautify}>
             Beautify
+          </button>
+          <button className="button button-secondary" type="button" onClick={minify}>
+            Minify
           </button>
         </div>
       </div>

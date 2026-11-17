@@ -508,6 +508,12 @@ select {
   background: #f8fafc;
 }
 
+.button.is-selected {
+  border-color: color-mix(in srgb, var(--tool-accent), var(--tint) 52%);
+  background: color-mix(in srgb, var(--tool-accent), var(--tint) 88%);
+  color: var(--tool-accent);
+}
+
 .segmented-control,
 .flag-group {
   display: inline-flex;
@@ -746,10 +752,6 @@ select {
 
 .json-editor .cm-activeLineGutter {
   background: transparent;
-}
-
-.json-indent-control button {
-  min-width: 92px;
 }
 
 .json-action-row {
@@ -1247,6 +1249,12 @@ select {
 
 [data-theme="dark"] .button-secondary:hover {
   background: color-mix(in srgb, var(--panel), black 10%);
+}
+
+[data-theme="dark"] .button.is-selected,
+[data-theme="dark"] .button.is-selected:hover {
+  color: var(--tool-accent);
+  background: color-mix(in srgb, var(--tool-accent), var(--tint) 88%);
 }
 
 [data-theme="dark"] .uuid-copy-row code,
